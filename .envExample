@@ -1,1 +1,2 @@
-MAPBOX_KEY="here goes the api key of mapbox"
+MAPBOX_KEY="here goes the api key of mapbox api"
+OPENWEATHERMAP_KEY="here goes the api key of openweathermap api"

@@ -1,4 +1,4 @@
-import { inquirerMenu,pause,readInput } from "./helpers/inquirer.js";
+import { inquirerMenu,pause,readInput, choiceCity} from "./helpers/inquirer.js";
 import { Searchers } from "./models/searchers.js";
 import colors from 'colors'
 
@@ -6,29 +6,35 @@ const main = async() => {
 
 
     let opt;
+    const places = new Searchers()
     do {
 
         opt = await inquirerMenu();
-        const places = new Searchers()
-        console.log(places.historial)
         switch(opt){
             case 1:
                 const inputCity = await readInput('Input a city: ')
-                await places.search(inputCity)
-                console.log(inputCity)
-                console.log('\nInformation of the city\n'.blue)
-
-                console.log('City: ', )
-                console.log('Lat: ', )
-                console.log('Lon: ', )
-                console.log('Temperature: ', )
-                console.log('Minimum: ', )
-                console.log('maximum: ', )
-                console.log()
+                const cities = await places.search(inputCity)
+                
+                const id = await choiceCity(cities)
+                if (id != 0){
+                    const theCity = cities.find(c => c.id === id)
+    
+                    // const weather = await places.getWeather([theCity.lat,theCity.lgt])
+                    places.saveToDb(theCity.nameCity)
+                    console.log('\nInformation of the city\n'.blue)
+    
+                    console.log('City: ', theCity.nameCity)
+                    console.log('Lat: ', theCity.lat)
+                    console.log('Lon: ', theCity.lgt)
+                    // console.log('Status: ', weather.status)
+                    // console.log('Temperature: ', weather.temp, '°C')
+                    // console.log('Minimum: ', weather.min, '°C')
+                    // console.log('maximum: ', weather.max, '°C')
+                    console.log()
+                }
                 break;
             case 2: 
-                
-                break;
+                places.deployHistorial
             }
         if (opt != 0){
             await pause()

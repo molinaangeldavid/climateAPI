@@ -66,13 +66,13 @@ export const readInput = async(message) => {
 
 }
 
-export const choiceTasks = async(listArr = []) => {
-    const choices = listArr.map((key,i) => {
+export const choiceCity = async(places = []) => {
+    const choices = places.map((place,i) => {
 
         const idx = i + 1;
         return {
-            name: `${(idx)}. `.green + key.description,
-            value: key.id 
+            name: `${(idx)}. `.green + place.nameCity,
+            value: place.id 
         }
 
     })
@@ -84,53 +84,14 @@ export const choiceTasks = async(listArr = []) => {
 
     const question = {
         type: 'list',
-        name: 'deletedTask',
-        message: 'What task would you like to remove?',
+        name: 'choicedCity',
+        message: 'What city would you like to search?',
         choices: choices
     }
 
-    const {deletedTask} = await inquirer.prompt(question)
-    return deletedTask
-
-    
-}
-export const confirmDeleteTask = async() => {
-
-    const question = {
-        type: 'confirm',
-        name: 'confirmD',
-        message: 'Are you sure you want to eliminate this task? '
-    }
-
-    const {confirmD} = await inquirer.prompt(question)
-
-    return confirmD
+    const {choicedCity} = await inquirer.prompt(question)
+    return choicedCity
 
 }
 
-export const choiceCompleteTasks = async(listArr = []) => {
-    const choices = listArr.map((key,i) => {
-
-        const idx = i + 1;
-        return {
-            name: `${(idx)}. `.green + key.description,
-            value: key.id,
-            checked: (key.completeIn) ? true : false
-        }
-
-    })
-
-    const question = {
-        type: 'checkbox',
-        name: 'choose',
-        message: 'Select: ',
-        choices: choices,
-
-    }
-
-    const {choose} = await inquirer.prompt(question)
-    return choose
-
-    
-}
 

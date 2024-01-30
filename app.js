@@ -19,17 +19,17 @@ const main = async() => {
                 if (id != 0){
                     const theCity = cities.find(c => c.id === id)
     
-                    // const weather = await places.getWeather([theCity.lat,theCity.lgt])
+                    const weather = await places.getWeather([theCity.lat,theCity.lgt])
                     places.saveToDb(theCity.nameCity)
                     console.log('\nInformation of the city\n'.blue)
     
                     console.log('City: ', theCity.nameCity)
                     console.log('Lat: ', theCity.lat)
                     console.log('Lon: ', theCity.lgt)
-                    // console.log('Status: ', weather.status)
-                    // console.log('Temperature: ', weather.temp, '°C')
-                    // console.log('Minimum: ', weather.min, '°C')
-                    // console.log('maximum: ', weather.max, '°C')
+                    console.log('Status: ', weather.status)
+                    console.log('Temperature: ', weather.temp, '°C')
+                    console.log('Minimum: ', weather.min, '°C')
+                    console.log('maximum: ', weather.max, '°C')
                     console.log()
                 }
                 break;
